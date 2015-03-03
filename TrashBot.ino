@@ -7,7 +7,7 @@
 USB Usb;
 XBOXRECV Xbox(&Usb);
 
-//define Pi
+//define PI
 const float pi = 3.14;
 
 //Variables used to run autonomysly
@@ -351,7 +351,6 @@ void loop() {
             if(angle < 360)
             {
               angle += 30; //value to increase the time the robot turns
-              numSides = (360 / angle);//sets the number of sides equal to 360 / angle
             }
           }
           if(Xbox.getButtonClick(LEFT,0))
@@ -359,7 +358,6 @@ void loop() {
             if(angle > 0)
             {
               angle -= 30; //value to decrease the time the robot turns 
-              numSides = (360 / angle);//sets the number of sides equal to 360 / angle
             }
           }
           
@@ -367,42 +365,39 @@ void loop() {
           turnTime = angle * angleconstant;
           //set the currentMillis counter to the current Clock time
           currentMillis = millis();
-          for(int i = 0; i < numSides; ++i)
-          { 
             //run this statment as long as the function has run less time than the alooted time via straightTime variable
-            if ((currentMillis - previousMillis) <= straightTime)
-            {
-              //Enable motors, set them to forward, and half speed
-              rightMotorGo = true; 
-              leftMotorGo = true;
-              rightMotorForward = true;
-              rightMotorSpeed = 125;
-              leftMotorForward = true;
-              leftMotorSpeed = 125;
-              //run the tankDrive Function;
-              tankDrive();
-            }
-            //run this statment as long as the function has surpased straight time, but is less than turnTime + straght Time
-            else if ((currentMillis - previousMillis) <= (straightTime + turnTime))
-            { 
-              //Enalbes Motors, turns left, and half speed
-              rightMotorGo = true;
-              leftMotorGo = true;
-              rightMotorForward = true;
-              rightMotorSpeed = 125;
-              leftMotorForward = false;
-              leftMotorSpeed = 125;
-              //run tankDrive Function
-              tankDrive();
-            }
-            else
-            {
-              //Stop the motors
-              rightMotorGo = false;
-              leftMotorGo = false;
-              //set the previousMillis counter to that of the currentMills counter to run the loop again
-              previousMillis = currentMillis;
-            }
+          if ((currentMillis - previousMillis) <= straightTime)
+          {
+            //Enable motors, set them to forward, and half speed
+            rightMotorGo = true; 
+            leftMotorGo = true;
+            rightMotorForward = true;
+            rightMotorSpeed = 125;
+            leftMotorForward = true;
+            leftMotorSpeed = 125;
+            //run the tankDrive Function;
+            tankDrive();
+          }
+          //run this statment as long as the function has surpased straight time, but is less than turnTime + straght Time
+          else if ((currentMillis - previousMillis) <= (straightTime + turnTime))
+          { 
+            //Enalbes Motors, turns left, and half speed
+            rightMotorGo = true;
+            leftMotorGo = true;
+            rightMotorForward = true;
+            rightMotorSpeed = 125;
+            leftMotorForward = false;
+            leftMotorSpeed = 125;
+            //run tankDrive Function
+            tankDrive();
+          }
+          else
+          {
+            //Stop the motors
+            rightMotorGo = false;
+            leftMotorGo = false;
+            //set the previousMillis counter to that of the currentMills counter to run the loop again
+            previousMillis = currentMillis;
           }  
         break;
         //uncomment the following code to impliment mode 3
