@@ -7,7 +7,7 @@
 USB Usb;
 XBOXRECV Xbox(&Usb);
 
-//define PI
+//define pi
 const float pi = 3.14;
 
 //Variables used to run autonomysly
